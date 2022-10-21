@@ -15,24 +15,16 @@ export class UsersService {
   create(createUserDto: CreateUserDto) {
 
     const user = new User()
-    user.login = createUserDto.login
-    user.firstName = createUserDto.firstName
-    user.secondName = createUserDto.secondName
-    user.thirdName = createUserDto.thirdName
-    user.isActive = createUserDto.isActive
-
+    if(createUserDto.login!==undefined) user.login = createUserDto.login
+    if(createUserDto.firstName!==undefined) user.firstName = createUserDto.firstName
+    if(createUserDto.secondName!==undefined) user.secondName = createUserDto.secondName
+    if(createUserDto.thirdName!==undefined) user.thirdName = createUserDto.thirdName
+    if(createUserDto.isActive!==undefined) user.isActive = createUserDto.isActive
     return this.usersRepository.save(user)
 
   }
 
   findAll() {
-    this.create({ 
-      login:'vres271',
-      firstName: 'Chepurnoy',
-      secondName: 'Nikita',
-      thirdName: 'Sergeevich',
-      isActive: false,
-    });
     return this.usersRepository.find();
   }
 
