@@ -13,11 +13,20 @@ export class UsersService {
   ) {}
 
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+
+    const user = new User()
+    user.login = createUserDto.login
+    user.firstName = createUserDto.firstName
+    user.secondName = createUserDto.secondName
+    user.thirdName = createUserDto.thirdName
+    user.isActive = createUserDto.isActive
+
+    return this.usersRepository.save(user)
+
   }
 
   findAll() {
-    this.usersRepository.save({ 
+    this.create({ 
       login:'vres271',
       firstName: 'Chepurnoy',
       secondName: 'Nikita',
