@@ -16,6 +16,7 @@ export class UsersService {
 
     const user = new User()
     if(createUserDto.login!==undefined) user.login = createUserDto.login
+    if(createUserDto.password!==undefined) user.password = createUserDto.password
     if(createUserDto.firstName!==undefined) user.firstName = createUserDto.firstName
     if(createUserDto.secondName!==undefined) user.secondName = createUserDto.secondName
     if(createUserDto.thirdName!==undefined) user.thirdName = createUserDto.thirdName
@@ -28,8 +29,8 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(findOptions:{id: number}|{login:string}) {
+    return this.usersRepository.findOne({where:findOptions})
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
