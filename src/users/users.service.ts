@@ -21,6 +21,7 @@ export class UsersService {
     if(createUserDto.secondName!==undefined) user.secondName = createUserDto.secondName
     if(createUserDto.thirdName!==undefined) user.thirdName = createUserDto.thirdName
     if(createUserDto.isActive!==undefined) user.isActive = createUserDto.isActive
+    if(createUserDto.roles!==undefined) user.roles = createUserDto.roles
     return this.usersRepository.save(user)
 
   }

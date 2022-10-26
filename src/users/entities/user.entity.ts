@@ -24,5 +24,11 @@ export class User {
   @Column({ default: true })
   isActive: boolean = false;
 
-  roles: Role[] = [Role.Admin];
+  @Column()
+  private _roles: string = '';
+
+  get roles():Role[] {return this._roles.split(',') as Role[]}; //[Role.Admin]
+  set roles(value:Role[]) {this._roles = value.join(',')};
+  
+
 }
