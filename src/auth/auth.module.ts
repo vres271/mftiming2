@@ -1,3 +1,4 @@
+import { RolesGuard } from './roles/roles.guard';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtStrategy } from './jwt.strategy';
@@ -18,7 +19,13 @@ import { jwtConstants } from './constants';
       signOptions: { expiresIn: '60s' },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy, {provide: APP_GUARD,useClass: JwtAuthGuard,}],
+  providers: [
+    AuthService, 
+    LocalStrategy, 
+    JwtStrategy, 
+    {provide: APP_GUARD,useClass: JwtAuthGuard,},
+    {provide: APP_GUARD,useClass: RolesGuard,},
+  ],
   exports: [AuthService],
 })
 export class AuthModule {}

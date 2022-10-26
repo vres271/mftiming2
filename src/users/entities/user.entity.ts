@@ -1,3 +1,4 @@
+import { Role } from './../../auth/roles/role.enum';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -22,4 +23,6 @@ export class User {
 
   @Column({ default: true })
   isActive: boolean = false;
+
+  roles: Role[] = [Role.Admin];
 }
