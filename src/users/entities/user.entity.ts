@@ -41,7 +41,7 @@ export class User {
 
   @AfterLoad()
   convertDate3() {
-    this.birthDate = this.birthDate+'T00:00:00.000'
+    this.birthDate = this.birthDate
   }  
 
 
