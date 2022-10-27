@@ -1,5 +1,4 @@
-import { Role } from './../../auth/roles/role.enum';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
 
 @Entity()
 export class User {
@@ -25,10 +24,20 @@ export class User {
   isActive: boolean = false;
 
   @Column()
-  private _roles: string = '';
+  roles: string = '';
 
-  get roles():Role[] {return this._roles.split(',') as Role[]}; //[Role.Admin]
-  set roles(value:Role[]) {this._roles = value.join(',')};
-  
+  // @Column('date')
+  // birthDate: string = '';
+
+  // @BeforeInsert()
+  // convertDate2() {
+  //   this.birthDate = '2022-10-27'
+  // }
+
+  // @BeforeUpdate()
+  // convertDate() {
+  //   this.birthDate = '2022-10-27'
+  // }
+
 
 }

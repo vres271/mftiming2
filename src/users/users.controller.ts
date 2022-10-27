@@ -9,27 +9,31 @@ import { Roles } from 'src/auth/roles/roles.decorator';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @Roles(Role.Admin)
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
-  @Roles(Role.Admin)
+  @Roles(Role.Admin, Role.User)
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
 
+  @Roles(Role.User, Role.User)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne({id:+id});
   }
 
+  @Roles(Role.Admin)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
 
+  @Roles(Role.Admin)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);

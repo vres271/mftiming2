@@ -1,6 +1,6 @@
 import { AuthService } from './auth/auth.service';
 import { LocalAuthGuard } from './auth/local-auth.guard';
-import { Controller, Get, Request, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Request, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Public } from './auth/auth.module';
 
@@ -18,6 +18,12 @@ export class AppController {
   @Post('auth/login')
   async login(@Request() req) {
     return this.authService.login(req.user);
+  }
+
+  @Post('auth/logout')
+  @HttpCode(204)
+  async logout(@Request() req) {
+    return this.authService.logOut(req.user);
   }
 
   @Public()

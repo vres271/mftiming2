@@ -1,4 +1,3 @@
-import { Role } from './../../auth/roles/role.enum';
 export class CreateUserDto {
     login: string
     password: string = ''
@@ -6,5 +5,6 @@ export class CreateUserDto {
     secondName: string = ''
     thirdName: string = ''
     isActive: boolean  = false; 
-    roles: Role[]  = []; 
+    roles: string; 
+    birthDate: string; 
 }
