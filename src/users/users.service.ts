@@ -22,7 +22,7 @@ export class UsersService {
     if(createUserDto.thirdName!==undefined) user.thirdName = createUserDto.thirdName
     if(createUserDto.isActive!==undefined) user.isActive = createUserDto.isActive
     if(createUserDto.roles!==undefined) user.roles = createUserDto.roles
-    // if(createUserDto.birthDate!==undefined) user.birthDate = createUserDto.birthDate
+    if(createUserDto.birthDate!==undefined) user.birthDate = createUserDto.birthDate
     return this.usersRepository.save(user)
 
   }
@@ -36,7 +36,7 @@ export class UsersService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return this.usersRepository.save(updateUserDto)
+    return this.usersRepository.update(id, this.usersRepository.create(updateUserDto))
   }
 
   remove(id: number) {

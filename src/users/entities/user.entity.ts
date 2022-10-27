@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate, AfterLoad } from 'typeorm';
 
 @Entity()
 export class User {
@@ -26,18 +26,23 @@ export class User {
   @Column()
   roles: string = '';
 
-  // @Column('date')
-  // birthDate: string = '';
+  @Column('date')
+  birthDate: string = '';
 
-  // @BeforeInsert()
-  // convertDate2() {
-  //   this.birthDate = '2022-10-27'
-  // }
+  @BeforeInsert()
+  convertDate2() {
+    this.birthDate = this.birthDate.split('T')[0]
+  }
 
-  // @BeforeUpdate()
-  // convertDate() {
-  //   this.birthDate = '2022-10-27'
-  // }
+  @BeforeUpdate()
+  convertDate() {
+    this.birthDate = this.birthDate.split('T')[0]
+  }
+
+  @AfterLoad()
+  convertDate3() {
+    this.birthDate = this.birthDate+'T00:00:00.000'
+  }  
 
 
 }
