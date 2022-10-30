@@ -5,11 +5,11 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({unique: true})
   login: string = '';
 
   @Column()
-  password: string = '';
+  password?: string = '';
 
   @Column()
   firstName: string = '';
@@ -26,17 +26,20 @@ export class User {
   @Column()
   roles: string = '';
 
-  @Column('date')
-  birthDate: string = '';
+  @Column({
+    type: 'date',
+    nullable: true,
+  })
+  birthDate: string|null = '';
 
   @BeforeInsert()
   convertDate2() {
-    this.birthDate = this.birthDate.split('T')[0]
+    this.birthDate = this.birthDate?this.birthDate.split('T')[0]:null
   }
 
   @BeforeUpdate()
   convertDate() {
-    this.birthDate = this.birthDate.split('T')[0]
+    this.birthDate = this.birthDate?this.birthDate.split('T')[0]:null
   }
 
   @AfterLoad()
