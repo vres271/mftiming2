@@ -20,6 +20,11 @@ export class AppController {
     return this.authService.login(req.user);
   }
 
+  @Get('auth/me')
+  async authMe(@Request() req) {
+    return this.authService.authMe(req.user);
+  }
+
   @Post('auth/logout')
   @HttpCode(204)
   async logout(@Request() req) {

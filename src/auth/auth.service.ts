@@ -31,4 +31,12 @@ export class AuthService {
     return {success:true}
   }
     
+  async authMe(user: any) {
+    const fullUser = await this.usersService.findOne({id:user.userId});
+    return {
+      auth:true,
+      user:fullUser
+    };
+  }
+    
 }
