@@ -26,15 +26,18 @@ export class UsersService {
     if(item.isActive!==undefined) user.isActive = item.isActive
     if(item.roles!==undefined) user.roles = item.roles
     if(item.birthDate!==undefined) user.birthDate = item.birthDate
-    if(item.categoriesIds) user.categories = item.categoriesIds.map(id=>({... new Category(), id}))
+    if(item.categoriesIds) {user.categories = item.categoriesIds.map(id=>({... new Category(), id}))}
     return user
   }
 
   async create(createUserDto: CreateUserDto) {
     const user = await this.createUserEntity(createUserDto)
+    console.log(user)
     return this.usersRepository.save(user)
       .then(user=>{
         delete user.password; 
+        user.categoriesIds = user.categories.map(category=>category.id)
+        delete user.categories
         return user;
       })
   }
