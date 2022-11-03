@@ -7,4 +7,5 @@ export class CreateUserDto {
     isActive: boolean  = false; 
     roles: string; 
     birthDate: string; 
+    categoriesIds: number[];
 }

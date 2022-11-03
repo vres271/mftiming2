@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate, AfterLoad } from 'typeorm';
+import { Category } from './../../categories/entities/category.entity';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate, AfterLoad, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity()
 export class User {
@@ -32,6 +33,12 @@ export class User {
   })
   birthDate: string|null = '';
 
+  categoriesIds: number[]
+
+  @ManyToMany(() => Category)
+  @JoinTable()
+  categories: Category[]
+  
   @BeforeInsert()
   convertDate2() {
     this.birthDate = this.birthDate?this.birthDate.split('T')[0]:null

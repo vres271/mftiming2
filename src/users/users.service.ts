@@ -1,3 +1,4 @@
+import { Category } from './../categories/entities/category.entity';
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -13,19 +14,24 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
-
+  async createUserEntity(item:any):Promise<User> {
     const user = new User()
-    if(createUserDto.login!==undefined) user.login = createUserDto.login
-    if(createUserDto.password) {
-      user.password = await bcrypt.hash(createUserDto.password, 10);
+    if(item.login!==undefined) user.login = item.login
+    if(item.password) {
+      user.password = await bcrypt.hash(item.password, 10);
     }
-    if(createUserDto.firstName!==undefined) user.firstName = createUserDto.firstName
-    if(createUserDto.secondName!==undefined) user.secondName = createUserDto.secondName
-    if(createUserDto.thirdName!==undefined) user.thirdName = createUserDto.thirdName
-    if(createUserDto.isActive!==undefined) user.isActive = createUserDto.isActive
-    if(createUserDto.roles!==undefined) user.roles = createUserDto.roles
-    if(createUserDto.birthDate!==undefined) user.birthDate = createUserDto.birthDate
+    if(item.firstName!==undefined) user.firstName = item.firstName
+    if(item.secondName!==undefined) user.secondName = item.secondName
+    if(item.thirdName!==undefined) user.thirdName = item.thirdName
+    if(item.isActive!==undefined) user.isActive = item.isActive
+    if(item.roles!==undefined) user.roles = item.roles
+    if(item.birthDate!==undefined) user.birthDate = item.birthDate
+    if(item.categoriesIds) user.categories = item.categoriesIds.map(id=>({... new Category(), id}))
+    return user
+  }
+
+  async create(createUserDto: CreateUserDto) {
+    const user = await this.createUserEntity(createUserDto)
     return this.usersRepository.save(user)
       .then(user=>{
         delete user.password; 
@@ -34,9 +40,11 @@ export class UsersService {
   }
 
   findAll() {
-    return this.usersRepository.find()
+    return this.usersRepository.find({relations: {categories: true,}})
       .then(items=>items.map(user=>{
         delete user.password; 
+        user.categoriesIds = user.categories.map(category=>category.id)
+        delete user.categories
         return user;
       }))
   }
@@ -54,10 +62,8 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    if(updateUserDto.password) {
-      updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
-    }
-    return this.usersRepository.update(id, updateUserDto)
+    const user = await this.createUserEntity(updateUserDto)
+    return this.usersRepository.save({... user, id})
   }
 
   remove(id: number) {
