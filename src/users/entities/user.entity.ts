@@ -1,5 +1,6 @@
+import { Racer } from './../../racers/entities/racer.entity';
 import { Category } from './../../categories/entities/category.entity';
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate, AfterLoad, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate, AfterLoad, ManyToMany, JoinTable, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -39,6 +40,12 @@ export class User {
   @JoinTable()
   categories: Category[]
   
+  @OneToMany(() => Racer, (racer) => racer.user)
+  racers: Racer[]
+
+
+
+
   @BeforeInsert()
   convertDate2() {
     this.birthDate = this.birthDate?this.birthDate.split('T')[0]:null

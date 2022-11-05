@@ -1,3 +1,6 @@
+import { RaceEvent } from './race-events/entities/race-event.entity';
+import { Season } from './seasons/entities/season.entity';
+import { Racer } from './racers/entities/racer.entity';
 import { Race } from './races/entities/race.entity';
 import { Category } from './categories/entities/category.entity';
 import { User } from './users/entities/user.entity';
@@ -9,6 +12,9 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoriesModule } from './categories/categories.module';
 import { RacesModule } from './races/races.module';
+import { RacersModule } from './racers/racers.module';
+import { RaceEventsModule } from './race-events/race-events.module';
+import { SeasonsModule } from './seasons/seasons.module';
 
 
 @Module({
@@ -20,13 +26,16 @@ import { RacesModule } from './races/races.module';
       username: 'root',
       password: 'Q2s$A1tPXpPG%9gqB40Jv',
       database: 'mftiming2',
-      entities: [User,Category,Race],
+      entities: [User,Category,Race,Racer,RaceEvent,Season],
       synchronize: true,
     }),
     UsersModule,
     AuthModule,
     CategoriesModule,
     RacesModule,
+    RacersModule,
+    RaceEventsModule,
+    SeasonsModule,
   ],
   controllers: [AppController],
   providers: [

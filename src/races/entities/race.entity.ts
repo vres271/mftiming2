@@ -1,4 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { RaceEvent } from './../../race-events/entities/race-event.entity';
+import { Season } from './../../seasons/entities/season.entity';
+import { Racer } from './../../racers/entities/racer.entity';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Race {
@@ -21,4 +24,12 @@ export class Race {
       })
     end: string|null = null;
 
+    @OneToMany(() => Racer, (racer) => racer.user)
+    racers: Racer[]
+
+    @ManyToOne(() => Season, (season) => season.races)
+    season: Season    
+
+    @OneToMany(() => RaceEvent, (raceEvent) => raceEvent.race)
+    raceEvents: RaceEvent[]
 }

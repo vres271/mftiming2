@@ -10,7 +10,7 @@ import { Repository } from 'typeorm';
 export class RacesService {
   constructor(
     @InjectRepository(Race)
-    private categoriesRepository: Repository<Race>,
+    private racesRepository: Repository<Race>,
   ) {}
 
   async create(createRaceDto: CreateRaceDto) {
@@ -19,32 +19,32 @@ export class RacesService {
     if(createRaceDto.name!==undefined) race.name = createRaceDto.name
     if(createRaceDto.start!==undefined) race.start = createRaceDto.start
     if(createRaceDto.end!==undefined) race.end = createRaceDto.end
-    return this.categoriesRepository.save(race)
+    return this.racesRepository.save(race)
       .then(race=>{
         return race;
       })
   }
 
   findAll() {
-    return this.categoriesRepository.find()
+    return this.racesRepository.find()
       .then(items=>items.map(race=>{
         return race;
       }))
   }
 
   findOne(findOptions:{id: number}) {
-    return this.categoriesRepository.findOne({where:findOptions})
+    return this.racesRepository.findOne({where:findOptions})
       .then(race=>{
         return race;
       })
   }
 
   async update(id: number, updateRaceDto: UpdateRaceDto) {
-    return this.categoriesRepository.update(id, updateRaceDto)
+    return this.racesRepository.update(id, updateRaceDto)
   }
 
   remove(id: number) {
-    return this.categoriesRepository.delete(id)
+    return this.racesRepository.delete(id)
   }
 
 }

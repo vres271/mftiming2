@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Season } from './../../seasons/entities/season.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Category {
@@ -14,5 +15,7 @@ export class Category {
     @Column({type: 'int', nullable: true})
     ageTo: number|null;
   
+    @ManyToOne(() => Season, (season) => season.races)
+    season: Season    
 
 }
