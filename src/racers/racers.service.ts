@@ -13,17 +13,8 @@ export class RacersService {
   ) {}
 
   async create(createRacerDto: CreateRacerDto) {
-
-    // const racer = new Racer()
-    const racer = {
-      user: {id:createRacerDto.userId},
-      race: {id:createRacerDto.raceId},
-    }
-
-    return this.racersRepository.save(racer)
+    return this.racersRepository.save(createRacerDto)
       .then(racer=>{
-        // racer.userId = racer.user?.id||0
-        // racer.raceId = racer.race?.id||0
         return racer;
       })
   }
@@ -31,9 +22,6 @@ export class RacersService {
   findAll() {
     return this.racersRepository.find()
       .then(items=>items.map(racer=>{
-        console.log(racer)
-        // racer.userId = racer.user?.id||0
-        // racer.raceId = racer.race?.id||0
         return racer;
       }))
   }

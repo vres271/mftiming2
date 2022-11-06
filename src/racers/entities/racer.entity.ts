@@ -1,7 +1,7 @@
 import { RaceEvent } from './../../race-events/entities/race-event.entity';
 import { Race } from './../../races/entities/race.entity';
 import { User } from './../../users/entities/user.entity';
-import { Column, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Racer {
@@ -23,5 +23,18 @@ export class Racer {
 
     @OneToMany(() => RaceEvent, (raceEvent) => raceEvent.racer)
     raceEvents: RaceEvent[]
+
+    // @BeforeUpdate()
+    // @BeforeInsert()
+    // convert() {
+    //     this.user= new User;
+    //     this.user.id = this.userId
+    //     this.race= new Race;
+    //     this.race.id = this.raceId
+
+    //     delete this.userId
+    //     delete this.raceId
+    // }
+  
 
 }
