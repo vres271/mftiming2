@@ -1,5 +1,6 @@
+import { Racer } from './../../racers/entities/racer.entity';
 import { Season } from './../../seasons/entities/season.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Category {
@@ -17,5 +18,9 @@ export class Category {
   
     @ManyToOne(() => Season, (season) => season.races)
     season: Season    
+
+    @OneToMany(() => Racer, (racer) => racer.category)
+    racers: Racer[]
+
 
 }

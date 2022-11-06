@@ -1,3 +1,4 @@
+import { Category } from './../../categories/entities/category.entity';
 import { RaceEvent } from './../../race-events/entities/race-event.entity';
 import { Race } from './../../races/entities/race.entity';
 import { User } from './../../users/entities/user.entity';
@@ -15,14 +16,21 @@ export class Racer {
     @ManyToOne(() => Race, (race) => race.racers)
     race: Race 
 
+    @ManyToOne(() => Category, (category) => category.racers)
+    category: Category  
+
     @Column()
     userId: number = 0;
 
     @Column()
     raceId: number = 0;
 
+    @Column()
+    categoryId: number = 0;
+
     @OneToMany(() => RaceEvent, (raceEvent) => raceEvent.racer)
     raceEvents: RaceEvent[]
+    
 
     // @BeforeUpdate()
     // @BeforeInsert()

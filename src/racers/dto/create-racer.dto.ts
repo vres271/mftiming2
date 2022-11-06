@@ -3,4 +3,5 @@ export class CreateRacerDto {
     // race: {id:number};
     userId: number = 0;
     raceId: number = 0;
+    categoryId: number = 0;
 }
