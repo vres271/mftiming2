@@ -1,1 +1,3 @@
-export class CreateSeasonDto {}
+export class CreateSeasonDto {
+    name: string = '';
+}

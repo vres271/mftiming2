@@ -13,12 +13,13 @@ export class CategoriesService {
     private categoriesRepository: Repository<Category>,
   ) {}
 
-  async create(createCategoryDto: CreateCategoryDto) {
+  create(createCategoryDto: CreateCategoryDto) {
 
     const category = new Category()
     if(createCategoryDto.name!==undefined) category.name = createCategoryDto.name
     if(createCategoryDto.ageFrom!==undefined) category.ageFrom = createCategoryDto.ageFrom
     if(createCategoryDto.ageTo!==undefined) category.ageTo = createCategoryDto.ageTo
+    if(createCategoryDto.seasonId!==undefined) category.seasonId = createCategoryDto.seasonId
     return this.categoriesRepository.save(category)
       .then(category=>{
         return category;

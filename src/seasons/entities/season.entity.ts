@@ -1,6 +1,6 @@
 import { Category } from './../../categories/entities/category.entity';
 import { Race } from './../../races/entities/race.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Season {
@@ -16,5 +16,7 @@ export class Season {
 
     @OneToMany(() => Category, (category) => category.season)
     categories: Category[]
+
+
 
 }

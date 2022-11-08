@@ -29,6 +29,10 @@ export class Race {
 
     @ManyToOne(() => Season, (season) => season.races)
     season: Season    
+    
+    @Column({nullable: true})
+    seasonId: number = 0;
+
 
     @OneToMany(() => RaceEvent, (raceEvent) => raceEvent.race)
     raceEvents: RaceEvent[]

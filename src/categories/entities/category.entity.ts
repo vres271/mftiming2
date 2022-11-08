@@ -16,11 +16,15 @@ export class Category {
     @Column({type: 'int', nullable: true})
     ageTo: number|null;
   
-    @ManyToOne(() => Season, (season) => season.races)
+    @ManyToOne(() => Season, (season) => season.categories)
     season: Season    
+    
+    @Column({nullable: true})
+    seasonId: number = 0;
 
     @OneToMany(() => Racer, (racer) => racer.category)
     racers: Racer[]
+    
 
 
 }

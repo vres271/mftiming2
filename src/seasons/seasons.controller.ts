@@ -19,7 +19,7 @@ export class SeasonsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.seasonsService.findOne(+id);
+    return this.seasonsService.findOne({id:+id});
   }
 
   @Patch(':id')

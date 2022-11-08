@@ -19,6 +19,7 @@ export class RacesService {
     if(createRaceDto.name!==undefined) race.name = createRaceDto.name
     if(createRaceDto.start!==undefined) race.start = createRaceDto.start
     if(createRaceDto.end!==undefined) race.end = createRaceDto.end
+    if(createRaceDto.seasonId!==undefined) race.seasonId = createRaceDto.seasonId
     return this.racesRepository.save(race)
       .then(race=>{
         return race;
