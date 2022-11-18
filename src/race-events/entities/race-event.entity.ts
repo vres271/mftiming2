@@ -6,16 +6,22 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class RaceEvent {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column()
     type: number = 0;
 
+    @Column()
+    racerId: number = 0;
+
+    @Column()
+    raceId: number = 0;
 
     @ManyToOne(() => Race, (race) => race.raceEvents)
     race: Race    
 
     @ManyToOne(() => Racer, (racer) => racer.raceEvents)
     racer: Racer    
+
 }

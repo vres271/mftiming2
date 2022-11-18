@@ -1,26 +1,50 @@
+import { RaceEvent } from './entities/race-event.entity';
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateRaceEventDto } from './dto/create-race-event.dto';
 import { UpdateRaceEventDto } from './dto/update-race-event.dto';
+import { Repository } from 'typeorm';
+
 
 @Injectable()
 export class RaceEventsService {
-  create(createRaceEventDto: CreateRaceEventDto) {
-    return 'This action adds a new raceEvent';
+  constructor(
+    @InjectRepository(RaceEvent)
+    private raceEventsRepository: Repository<RaceEvent>,
+  ) {}
+
+  async create(createRaceEventDto: CreateRaceEventDto) {
+
+    const raceEvent = new RaceEvent()
+    if(createRaceEventDto.type!==undefined) raceEvent.type = createRaceEventDto.type
+    if(createRaceEventDto.raceId!==undefined) raceEvent.raceId = createRaceEventDto.raceId
+    if(createRaceEventDto.racerId!==undefined) raceEvent.racerId = createRaceEventDto.racerId
+    return this.raceEventsRepository.save(raceEvent)
+      .then(raceEvent=>{
+        return raceEvent;
+      })
   }
 
   findAll() {
-    return `This action returns all raceEvents`;
+    return this.raceEventsRepository.find()
+      .then(items=>items.map(raceEvent=>{
+        return raceEvent;
+      }))
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} raceEvent`;
+  findOne(findOptions:{id: number}) {
+    // return this.raceEventsRepository.findOne({where:findOptions})
+    //   .then(raceEvent=>{
+    //     return raceEvent;
+    //   })
   }
 
-  update(id: number, updateRaceEventDto: UpdateRaceEventDto) {
-    return `This action updates a #${id} raceEvent`;
+  async update(id: number, updateRaceEventDto: UpdateRaceEventDto) {
+    return this.raceEventsRepository.update(id, updateRaceEventDto)
   }
 
   remove(id: number) {
-    return `This action removes a #${id} raceEvent`;
+    return this.raceEventsRepository.delete(id)
   }
+
 }
