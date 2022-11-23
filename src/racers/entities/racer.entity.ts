@@ -7,8 +7,8 @@ import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, JoinTable, Many
 @Entity()
 export class Racer {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @ManyToOne(() => User, (user) => user.racers)
     user: User  
@@ -22,8 +22,8 @@ export class Racer {
     @Column()
     userId: number = 0;
 
-    @Column()
-    raceId: number = 0;
+    @Column({length: 36})
+    raceId: string;
 
     @Column()
     categoryId: number = 0;

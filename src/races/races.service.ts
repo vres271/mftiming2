@@ -33,18 +33,18 @@ export class RacesService {
       }))
   }
 
-  findOne(findOptions:{id: number}) {
+  findOne(findOptions:{id: string}) {
     return this.racesRepository.findOne({where:findOptions})
       .then(race=>{
         return race;
       })
   }
 
-  async update(id: number, updateRaceDto: UpdateRaceDto) {
+  async update(id: string, updateRaceDto: UpdateRaceDto) {
     return this.racesRepository.update(id, updateRaceDto)
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.racesRepository.delete(id)
   }
 

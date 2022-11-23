@@ -12,11 +12,11 @@ export class RaceEvent {
     @Column()
     type: number = 0;
 
-    @Column()
-    racerId: number = 0;
+    @Column({length: 36})
+    racerId: string = '';
 
-    @Column()
-    raceId: number = 0;
+    @Column({length: 36})
+    raceId: string;
 
     @ManyToOne(() => Race, (race) => race.raceEvents)
     race: Race    

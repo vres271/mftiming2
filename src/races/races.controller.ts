@@ -19,16 +19,16 @@ export class RacesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.racesService.findOne({id:+id});
+    return this.racesService.findOne({id});
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRaceDto: UpdateRaceDto) {
-    return this.racesService.update(+id, updateRaceDto);
+    return this.racesService.update(id, updateRaceDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.racesService.remove(+id);
+    return this.racesService.remove(id);
   }
 }

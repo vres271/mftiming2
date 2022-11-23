@@ -26,12 +26,12 @@ export class RacersService {
       }))
   }
 
-  findOne(findOptions:{id: number}) {
-    return this.racersRepository.findOne({where:findOptions})
-      .then(racer=>{
-        return racer;
-      })
-  }
+  // findOne(findOptions:{id: number}) {
+  //   return this.racersRepository.findOne({where:findOptions})
+  //     .then(racer=>{
+  //       return racer;
+  //     })
+  // }
 
   async update(id: number, updateRacerDto: UpdateRacerDto) {
     return this.racersRepository.update(id, updateRacerDto)

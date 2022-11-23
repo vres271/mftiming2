@@ -6,9 +6,9 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "ty
 @Entity()
 export class Race {
 
-    @PrimaryGeneratedColumn()
-    id: number;
-  
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
+
     @Column()
     name: string = '';
 

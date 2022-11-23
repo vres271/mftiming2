@@ -17,10 +17,10 @@ export class RacersController {
     return this.racersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.racersService.findOne({id:+id});
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.racersService.findOne({id:+id});
+  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRacerDto: UpdateRacerDto) {
