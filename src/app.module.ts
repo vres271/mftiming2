@@ -22,9 +22,9 @@ import { SeasonsModule } from './seasons/seasons.module';
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
-      port: 3307,
+      port: 3306,
       username: 'root',
-      password: 'Q2s$A1tPXpPG%9gqB40Jv',
+      password: '123123123',
       database: 'mftiming2',
       entities: [User,Category,Race,Racer,RaceEvent,Season],
       synchronize: true,
